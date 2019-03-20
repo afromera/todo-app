@@ -8,7 +8,7 @@ const server = express()
 server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())
 
-server.listen(port, function(){
+server.listen(port, function () {
     console.log(`BACKEND executando na porta ${port}.`)
 })
 
