@@ -4,8 +4,6 @@ import IconButton from '../template/iconButton'
 
 export default prop => (
     <div role='form' className='todoForm'>
-
-
         <Grid cols='12 9 10'>
             <input id='description' className='form-control' placeholder='Adicione uma tarefa'></input>
         </Grid>
