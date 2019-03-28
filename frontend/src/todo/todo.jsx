@@ -18,6 +18,7 @@ export default class Todo extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleAdd = this.handleAdd.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
+        this.handleClear = this.handleClear.bind(this)
 
         //handles list
         this.handleMarkAsDone = this.handleMarkAsDone.bind(this)
@@ -26,13 +27,13 @@ export default class Todo extends Component {
 
         this.refresh()
     }
-    
+
     refresh(description = '') {
         const search = description ? `&description__regex=/${description}/` : ''
         axios.get(`${URL}?sort=-createdAt${search}`)
-        .then(resp => this.setState({ ...this.setState, description, list: resp.data }))
+            .then(resp => this.setState({ ...this.setState, description, list: resp.data }))
     }
-    
+
     handleChange(e) {
         this.setState({ ...this.state, description: e.target.value })
     }
@@ -42,9 +43,13 @@ export default class Todo extends Component {
         axios.post(URL, { description })
             .then(resp => this.refresh())
     }
-    
+
     handleSearch() {
         this.refresh(this.state.description)
+    }
+
+    handleClear() {
+        this.refresh()
     }
 
     handleMarkAsDone(todo) {
@@ -70,7 +75,8 @@ export default class Todo extends Component {
                 <TodoForm description={this.state.description}
                     handleChange={this.handleChange}
                     handleAdd={this.handleAdd}
-                    handleSearch={this.handleSearch} />
+                    handleSearch={this.handleSearch}
+                    handleClear={this.handleClear} />
 
                 <TodoList list={this.state.list}
                     handleMarkAsDone={this.handleMarkAsDone}
